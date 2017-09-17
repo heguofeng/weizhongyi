@@ -1,0 +1,283 @@
+button:hover .fa,
+a:hover .fa {
+    transform: scale(1.2);
+    text-decoration: none;
+    /* transition: all 100ms; */
+}
+
+.bgimg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.bgimg img {
+    width: 100%;
+    height: 100%;
+    filter: blur(7px);
+    -webkit-filter: blur(7px);
+}
+
+.top {
+    background-color: #566d84;
+    width: 100%;
+}
+
+.top_header {
+    height: 60px;
+    width: 1140px;
+    margin: 0 auto;
+}
+
+.top_header_l img {
+    margin: 2px auto;
+    border-radius: 50%;
+}
+
+.logo_txt {
+    font: 25px/60px "微软雅黑";
+    color: #FFFAFA;
+    margin-left: 15px;
+    display: block;
+}
+
+.logo_txt:hover {
+    color: #fff;
+}
+
+.top_header_r li {
+    float: left;
+    /*	margin: 0 20px;*/
+    height: 60px;
+}
+
+.top_header_r li a {
+    font: 16px "微软雅黑";
+    color: #c2c2c2;
+    display: block;
+    margin-top: 20px;
+    padding: 0 20px;
+    transition: all 0.5s;
+}
+
+.top_header_r li a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.wrap {
+    width: 1020px;
+    margin: 0 auto;
+}
+
+.header {
+    /* position: fixed;
+    left: 50%;
+    top: 50%; */
+    /* transform: translateX(-50%);
+    margin-top: -450px; */
+    width: 1020px;
+    padding: 5px 10px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 2;
+}
+
+.header h1 {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.header h1 a {
+    color: #0A0909;
+    font-weight: 700;
+    /* text-shadow: 1px 1px #0A090A; */
+}
+
+.main {
+    border: 1px solid #ececec;
+    /* position: absolute; */
+    display: block;
+    /* left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); */
+    width: 1020px;
+    height: 600px;
+    text-align: center;
+    overflow: auto;
+    background: #fff;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 5px #000; */
+    /* opacity: 0.8; */
+    /* margin: 0 auto; */
+}
+
+.main_menu {
+    margin-bottom: 10px;
+}
+
+.main_table {
+    padding: 5px 10px;
+}
+
+.btn_left {
+    margin-left: 15px
+}
+
+.add_box {
+    width: 400px;
+    height: 350px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    /* transform: translate(-50%, -50%); */
+    margin-left: -200px;
+    margin-top: -175px;
+    background: #fff;
+    text-align: center;
+    z-index: 999;
+    border-radius: 5px;
+}
+
+.add_box h3 {
+    color: #5cb85c;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.guanbi {
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    display: block;
+}
+
+.selectBox {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    display: block;
+    margin: 0 auto;
+}
+
+.table tr td:first-child {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.checked {
+    /* background-color: #EE7A23; */
+    border-color: #2132EE;
+}
+
+.item-all-select,
+.item-all-cancle,
+.item-all-delete {
+    float: left;
+}
+
+.item-all-select span {
+    display: block;
+    float: left;
+    margin-left: 10px;
+}
+
+.item-all-cancle,
+.item-all-delete {
+    margin-left: 20px;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    background: #000;
+    opacity: 0.5;
+}
+
+@keyframes addBox {
+    0% {
+        transform: scale(0.7);
+    }
+    45% {
+        transform: scale(1.05);
+    }
+    80% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.frameBox {
+    animation: 0.4s ease 0s normal;
+    animation-name: addBox;
+}
+
+.no-data p {
+    margin: 20px;
+    font-size: 30px;
+    color: #d81e06;
+}
+
+.no-data {
+    margin-top: 100px;
+}
+
+.loginBox {
+    width: 400px;
+    height: 350px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -175px;
+    /* transform: translate(-50%, -50%); */
+    background: #fff;
+    text-align: center;
+    z-index: 1000;
+    border-radius: 5px;
+    border: 1px solid #696B6D;
+}
+
+.login_title {
+    height: 56px;
+    line-height: 56px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.login_title h3 {
+    float: left;
+    margin-left: 20px;
+    line-height: inherit;
+}
+
+.yzc {
+    width: 150px;
+    float: right;
+    margin-right: 20px;
+    text-align: right;
+}
+
+.yzc a {
+    color: #2e6da4;
+}
+
+.yzc a:hover {
+    color: #286090;
+}
+
+.btn_login {
+    padding: 8px 20px;
+    width: 50%;
+}
