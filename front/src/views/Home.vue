@@ -2,7 +2,7 @@
 	<el-row class="container">
 		<el-col :span="24" class="header">
 			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-				{{collapsed?'':sysName}}
+				{{collapsed?'微':sysName}}
 			</el-col>
 			<el-col :span="10">
 				<div class="tools" @click.prevent="collapse">
@@ -130,7 +130,7 @@
 			var admin = localStorage.getItem('admin');
 			if (admin) {
 				admin = JSON.parse(admin);
-				this.adminName = admin.phone || '';
+				this.adminName = admin.phone || '泰达米尔';
 				// this.adminAvatar = admin.avatar || '';
 			}
 

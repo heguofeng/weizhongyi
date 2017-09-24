@@ -1,0 +1,35 @@
+{
+    "links": {
+        "self": {
+            "href": "http://106.14.145.165:3333/records?sample=web_users&wjson=%7B%22phone%22:%2215888274549%22%7D",
+            "method": "GET"
+        }
+    },
+    "include": {},
+    "data": [{
+        "links": {
+            "self": {
+                "href": "http://106.14.145.165:3333/record/59c1e117e959360828e8345c?sample=web_users",
+                "method": "GET"
+            }
+        },
+        "data": {
+            "type": "web_users",
+            "id": "59c1e117e959360828e8345c",
+            "attributes": { "_id": "59c1e117e959360828e8345c", "header": { "ver": "1.0.0", "class": "web_users", "sample": "web_users", "family": "", "keywords": [], "create": { "operator": "", "tool": "", "enclose": "" }, "modify": { "operator": "", "tool": "", "enclose": "" }, "access": { "operator": "", "tool": "", "enclose": "" }, "importOids": [], "exportOids": [] }, "phone": "15888274549", "password": "111", "name": "", "sex": "", "age": "", "avatar": "", "createTime": "", "lastLoginTime": "", "security_code": "580876" }
+        },
+        "include": {}
+    }]
+}
+
+
+{
+    "links": {
+        "self": {
+            "href": "http://106.14.145.165:3333/records?sample=web_users&wjson=%7B%22phone%22:%2215888274541%22%7D",
+            "method": "GET"
+        }
+    },
+    "include": {},
+    "data": []
+}

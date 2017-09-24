@@ -21,16 +21,10 @@
 			</el-table-column>
 			<el-table-column prop="_id" label="编号" width="300" sortable>
 			</el-table-column>
-			<el-table-column prop="student_id" label="学号" width="100" sortable>
+			<el-table-column prop="phone" label="手机号" width="200" sortable>
 			</el-table-column>
-			<el-table-column prop="name" label="姓名" width="100" sortable>
-			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="100" sortable>
-			</el-table-column>
-			<el-table-column prop="college" label="学院" width="200" sortable>
-			</el-table-column>
-			<el-table-column prop="age" label="年龄" min-width="100" sortable>
-			</el-table-column>
+			<el-table-column prop="password" label="密码" width="200" sortable>
+			</el-table-column>	
 		</el-table>
 	</template>
 	</section>
@@ -58,25 +52,21 @@
 			getUser: function () {
 				this.loading = true;
 				//NProgress.start();
-				this.axios.get('/api/students').then((response)=> {
+				this.axios.get('/api/users').then((response) => {
 					this.loading = false;
-					//NProgress.done();
-					let studentArr = []; //重置
+					let usersArr = []; //重置
 					let data = response.data.result;
 					data.forEach(function(item) {
 						var Data = {
 							_id: item._id,
-							sex: item.sex,
-							name: item.name,
-							age: item.age,
-							college: item.college,
-							student_id: item.student_id
+							phone: item.phone,
+							password: item.password
 						}
-						studentArr.push(Data);
+						usersArr.push(Data);
 					});
-					this.users = studentArr;
-				},(error)=>{
-					console.log("获取学生失败：" + error);
+					this.users = usersArr;
+				}, (error) => {
+					console.log("获取信息失败：" + error);
 				});
 			}
 		},

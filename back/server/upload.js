@@ -41,8 +41,7 @@ function uploadFile(ctx, options) {
     let req = ctx.req
     let res = ctx.res
     let busboy = new Busboy({ headers: req.headers })
-
-    // 获取类型
+        // 获取类型
     let fileType = options.fileType || 'common'
     let filePath = path.join(options.path, fileType) //path.join表示返回连接后的地址
     let mkdirResult = mkdirsSync(filePath) //调用创建目录方法
@@ -62,8 +61,7 @@ function uploadFile(ctx, options) {
             let saveTo = path.join(_uploadFilePath)
                 // 文件保存到制定路径
             file.pipe(fs.createWriteStream(saveTo))
-
-            // 文件写入事件结束
+                // 文件写入事件结束，返回data
             file.on('end', function() {
                 result.success = true
                 result.message = '文件上传成功'

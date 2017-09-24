@@ -4,13 +4,10 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
-					<el-input v-model="filters.name" placeholder="姓名"></el-input>
+					<el-input v-model="filters.phone" placeholder="手机号"></el-input>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" v-on:click="getUsers">查询</el-button>
-				</el-form-item>
-				<el-form-item>
-					<el-button type="primary" @click="handleAdd">新增</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -23,31 +20,18 @@
 			</el-table-column>
 			<el-table-column prop="_id" label="编号" width="300" sortable>
 			</el-table-column>
-			<el-table-column prop="name" label="姓名" width="100" sortable>
+			<el-table-column prop="phone" label="手机号" width="200" sortable>
 			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="100" sortable>
-			</el-table-column>
-			<el-table-column prop="college" label="学院" width="200" sortable>
-			</el-table-column>
-			<el-table-column prop="age" label="年龄" width="100" sortable>
-			</el-table-column>
-			<el-table-column prop="student_id" label="学号" width="200" sortable>
-			</el-table-column>
-			
+			<el-table-column prop="password" label="密码" width="200" sortable>
+			</el-table-column>		
 			<el-table-column label="操作" min-width="150">
-				<template scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+				<template scope="scope"><!-- 用来传递id -->
+					<el-button size="small" @click="updateInfo(scope.row._id)">编辑</el-button>
+					<el-button type="danger" size="small" @click="deleteUser(scope.row._id)">删除</el-button>
+					<el-button type="danger" size="small" @click="updatePsw(scope.row._id)">修改密码</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
-
-		<!--工具条-->
-		<el-col :span="24" class="toolbar">
-			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-			<!-- <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;"> -->
-			</el-pagination>
-		</el-col>
 
 		<!--编辑界面-->
 		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
@@ -77,31 +61,19 @@
 			</div>
 		</el-dialog>
 
-		<!--新增界面-->
-		<el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
-			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="addForm.name" auto-complete="off"></el-input>
+		<!--修改密码界面-->
+		<el-dialog title="修改密码" v-model="updatePswFormVisible" :close-on-click-modal="false" size="tiny">
+			<el-form :model="updatePswForm" label-width="80px" :rules="updatePswFormRules" ref="updatePswForm">
+				<el-form-item label="手机号" prop="phone">
+					<el-input v-model="updatePswForm.phone" auto-complete="off" readonly ></el-input>
 				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="addForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
-					</el-radio-group>
-				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
-				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="addForm.birth"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="addForm.addr"></el-input>
+				<el-form-item label="新密码" prop="password">
+					<el-input v-model="updatePswForm.password" auto-complete="off"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="addFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
+				<el-button @click.native="updatePswFormVisible = false">取消</el-button>
+				<el-button type="primary" @click.native="updatePswSubmit(updatePswForm._id)" :loading="updatePswLoading">提交</el-button>
 			</div>
 		</el-dialog>
 	</section>
@@ -113,7 +85,7 @@
 		data() {
 			return {
 				filters: {
-					name: ''
+					phone: ''
 				},
 				users: [],
 				total: 0,
@@ -138,55 +110,37 @@
 					addr: ''
 				},
 
-				addFormVisible: false,//新增界面是否显示
-				addLoading: false,
-				addFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
+				updatePswFormVisible: false,//修改密码界面是否显示
+				updatePswLoading: false,
+				updatePswFormRules: {
+					password: [
+						{ required: true, message: '请输入密码', trigger: 'blur' }
 					]
 				},
-				//新增界面数据
-				addForm: {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
+				updatePswForm:{
+					password:''
 				}
-
 			}
 		},
 		methods: {
-			//性别显示转换
-			// formatSex: function (row, column) {
-			// 	return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-			// },
-			// handleCurrentChange(val) {
-			// 	this.page = val;
-			// 	this.getUsers();
-			// },
 			//获取用户列表
 			getUsers: function() {
 				this.listLoading = true;
-				this.axios.get('/api/students').then((response)=> {
+				this.axios.get('/api/users').then((response)=> {
 					this.listLoading = false;
-					let studentArr = []; //重置
+					let usersArr = []; //重置
 					let data = response.data.result;
-					// var _Date = JSON.parse(response.data.students);
 					data.forEach(function(item) {
 						var Data = {
 							_id: item._id,
-							sex: item.sex,
-							name: item.name,
-							age: item.age,
-							college: item.college,
-							student_id: item.student_id
+							phone:item.phone,
+							password:item.password
 						}
-						studentArr.push(Data);
+						usersArr.push(Data);
 					});
-					this.users = studentArr;
+					this.users = usersArr;
 				},(error)=>{
-					console.log("获取学生失败：" + error);
+					console.log("获取信息失败：" + error);
 				});
 			},
 			getToken: function() {
@@ -197,42 +151,39 @@
 				});
 			},	
 			//删除
-			handleDel: function (index, row) {
+			deleteUser: function (id) {
 				this.$confirm('确认删除该记录吗?', '提示', {
 					type: 'warning'
 				}).then(() => {
-					this.listLoading = true;
-					//NProgress.start();
-					let para = { id: row.id };
-					removeUser(para).then((res) => {
-						this.listLoading = false;
-						//NProgress.done();
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUsers();
-					});
+					this.axios.delete('/api/user/' + this.token + '/' + id).then((response)=> {				
+						this.$message.success( response.data.result);
+					}).catch(function(err) {
+						alert(err);
+					})
 				}).catch(() => {
 
 				});
 			},
 			//显示编辑界面
-			handleEdit: function (index, row) {
+			updateInfo: function (id) {
 				this.editFormVisible = true;
-				this.editForm = Object.assign({}, row);
+
 			},
-			//显示新增界面
-			handleAdd: function () {
-				this.addFormVisible = true;
-				this.addForm = {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
-				};
+			//显示修改密码界面
+			updatePsw:function(id){
+				this.updatePswFormVisible = true;
+				this.axios.get('/api/user/' + id).then((response) =>{
+					var Data = response.data.result;
+					var _Data = {
+						_id: Data._id,
+						phone:Data.phone,
+					};
+					this.updatePswForm = _Data;
+				}).catch(function(err) {
+					alert(err);
+				});
 			},
+
 			//编辑
 			editSubmit: function () {
 				this.$refs.editForm.validate((valid) => {
@@ -257,59 +208,46 @@
 					}
 				});
 			},
-			//新增
-			addSubmit: function () {
-				this.$refs.addForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.addLoading = true;
-							//NProgress.start();
-							let para = Object.assign({}, this.addForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							addUser(para).then((res) => {
-								this.addLoading = false;
-								//NProgress.done();
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
-								this.getUsers();
-							});
-						});
-					}
+
+			//修改密码
+			updatePswSubmit:function(id){
+				//将token放进updatePswForm里一起传过去
+				this.updatePswLoading=true;
+				this.updatePswFormVisible=true;
+				this.updatePswForm.token = this.token;
+				this.axios.put('/api/user-psw/' + id, this.updatePswForm).then((response)=> {
+					this.updatePswFormVisible=false;
+					this.updatePswLoading=false;
+				}).catch(function(err) {
+					alert(err);
 				});
 			},
 			selsChange: function (sels) {
 				this.sels = sels;
 			},
-			//批量删除
-			batchRemove: function () {
-				var ids = this.sels.map(item => item.id).toString();
-				this.$confirm('确认删除选中记录吗？', '提示', {
-					type: 'warning'
-				}).then(() => {
-					this.listLoading = true;
-					//NProgress.start();
-					let para = { ids: ids };
-					batchRemoveUser(para).then((res) => {
-						this.listLoading = false;
-						//NProgress.done();
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
+			//订阅消息--学生数据变化
+			websocket: function() {
+				this.axios.get('/api/token').then((response)=> {
+					this.token = response.data.result;
+					var ws = new WebSocket(`ws://${location.hostname}:3000`);
+					ws.onopen = ()=>{
+						console.log("打开了ws")
+						ws.send(this.token);
+					};
+					ws.onmessage = ()=> {
+						console.log('收到了消息')
+						this.getToken();
 						this.getUsers();
-					});
-				}).catch(() => {
-
+					};
+				},(error)=> {
+					console.log("出错：" + error);
 				});
-			}
+			},
 		},
 		mounted() {
 			this.getToken();
 			this.getUsers();
+			this.websocket();
 		}
 	}
 

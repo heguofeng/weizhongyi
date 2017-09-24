@@ -1,7 +1,6 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const controller = require('./controller');
-const templating = require('./templating');
 const rest = require('./rest');
 const session = require('koa-session2');
 const config = require('../config');
@@ -25,7 +24,7 @@ app.use(async(ctx, next) => {
         execTime;
     await next(); //直接跳转至下一个中间件，后面的两行代码最后执行
     execTime = new Date().getTime() - start;
-    console.log("完成时间：" + execTime + "ms")
+    // console.log("完成时间：" + execTime + "ms")
     ctx.response.set('X-Response-Time', `${execTime}ms`);
 });
 
@@ -43,12 +42,6 @@ if (!isProduction) {
 //第三个解析POST请求
 app.use(bodyParser());
 
-// 第四个middleware负责给ctx加上render() 来使用Nunjucks：
-app.use(templating(path.join(__dirname, './views'), {
-    noCache: !isProduction,
-    watch: !isProduction
-}));
-
 // bind .rest() for ctx:
 app.use(rest.restify());
 
@@ -65,11 +58,13 @@ let wss = new WebSocketServer({
 wss.on('connection', function(ws, req) {
     const ip = req.connection.remoteAddress;
     ws.on('message', function(message) {
-        var ws2 = new WebSocket(`ws://106.14.145.165:3334/record/subscribe?sample=student&token=${message}`);
-        ws2.on('open', function() {
-            // console.log('成功连接服务端')
+        console.log(message);
+        //订阅用户信息变化
+        var wsUserInfo = new WebSocket(`ws://106.14.145.165:3334/record/subscribe?${config.sample_U}&token=${message}`);
+        wsUserInfo.on('open', function() {
+            console.log('ws成功连接服务端')
         });
-        ws2.on('message', function(message) {
+        wsUserInfo.on('message', function(message) {
             //判断是否是第一条提示语句，无用
             if (JSON.parse(message).successmsg) {
                 ws.send(message);

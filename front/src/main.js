@@ -17,21 +17,22 @@ router.beforeEach((to, from, next) => {
     if (to.name == 'Admin') {
         localStorage.removeItem('admin');
     }
-    let admin = JSON.parse(localStorage.getItem('admin')) || '';
-    if (to.meta.requiresAuth && admin == '') {
-        next({ name: 'Admin' });
+    let admin = JSON.parse(localStorage.getItem('admin'));
+    let user = JSON.parse(localStorage.getItem('user'));
+    //后台
+    if (to.meta.requiresAuth && !admin) {
+        // next({ name: 'Admin' });
+        next()
     } else {
         next()
     }
-    // if (user == '') {
-    //     if (to.name == 'LoginIn' || to.name == 'Admin' || to.name == 'SignIn' || to.name == 'ForgetPsw') {
-    //         next()
-    //     } else {
-    //         next({ name: 'LoginIn' })
-    //     }
-    // } else {
-    //     next();
-    // }
+    //前台
+    if (to.meta.authUser && !user) {
+        next({ name: 'LoginIn' })
+    } else {
+        next()
+    }
+
 });
 
 /* eslint-disable no-new */
