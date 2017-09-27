@@ -1,6 +1,6 @@
 const _webHttp = require('../webhttp');
 const APIError = require('../rest').APIError;
-const config = require('../../config');
+const config = require('../../web_config');
 //云之讯
 var ucpaasClass = require('ucpaas-sdk/lib/ucpaasClass');
 var ucpaas = new ucpaasClass(config.ucpaas_options);

@@ -3,7 +3,7 @@ const path = require('path')
 const os = require('os')
 const fs = require('fs')
 const Busboy = require('busboy')
-const config = require('../config')
+const config = require('../web_config')
 
 /**
  * 同步创建文件目录
@@ -67,7 +67,7 @@ function uploadFile(ctx, options) {
                 result.success = true
                 result.message = '文件上传成功'
                 result.data = {
-                    pictureUrl: `//${config.host}:${config.port}/static/uploads/${fileType}/${fileName}`
+                    pictureUrl: `/static/uploads/${fileType}/${fileName}`
                 }
                 console.log('文件上传成功！')
                 resolve(result)

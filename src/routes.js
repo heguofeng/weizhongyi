@@ -79,7 +79,7 @@ export default new VueRouter({
         {
             path: '*',
             hidden: true,
-            redirect: { path: '/404' }
+            redirect: '/404'
         }
     ]
 })

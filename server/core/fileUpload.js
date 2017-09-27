@@ -1,15 +1,24 @@
 const _webHttp = require('../webhttp');
 const APIError = require('../rest').APIError;
-const config = require('../../config');
+const config = require('../../web_config');
 
 const { uploadFile } = require('../upload');
 const path = require('path');
+const isProduction = process.env.NODE_ENV === 'production';
+
 
 module.exports = {
     //上传头像
     postUpload: async(ctx, next) => {
         // 上传文件请求处理
-        let serverFilePath = path.resolve(__dirname, '../../static/uploads'); //该方法直接跳转至上级目录的static。。。
+        //判断开发环境
+
+        if (!isProduction) {
+            var serverFilePath = path.resolve('static', 'uploads');
+        } else {
+            var serverFilePath = path.resolve('dist', 'static', 'uploads');
+        }
+
         // 上传文件事件
         let phone = ctx.request.headers.phone,
             token = ctx.request.headers.token,

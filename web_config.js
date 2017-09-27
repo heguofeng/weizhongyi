@@ -1,12 +1,5 @@
-const isProduction = process.env.NODE_ENV === 'production';
-if (!isProduction) {
-    var host = 'www.www.wmuoldstar.cn'
-} else {
-    var host = '127.0.0.1'
-}
 const config = {
     port: 3000,
-    host: host,
     serverIp: "http://106.14.145.165:3333",
     sample_U: "sample=web_users", //用户表
     sample_A: "sample=student_admin",

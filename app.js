@@ -1,11 +1,13 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
-const controller = require('./controller');
-const rest = require('./rest');
+const controller = require('./server/controller');
+const rest = require('./server/rest');
 const session = require('koa-session2');
-const config = require('../config');
+const config = require('./web_config');
 const path = require('path');
 const cors = require('koa2-cors');
+const koaStatic = require('koa-static');
+const historyApiFallback = require('koa-history-api-fallback');
 // 导入WebSocket模块:
 const WebSocket = require('ws');
 // 引用Server类:
@@ -13,7 +15,9 @@ const WebSocketServer = WebSocket.Server;
 const app = new Koa();
 
 app.use(cors());
-//声明当前不是开发环境
+
+//声明当前环境变量(全局)
+// process.env.NODE_ENV = 'production';
 const isProduction = process.env.NODE_ENV === 'production';
 
 // log request URL:记录日志信息
@@ -33,12 +37,6 @@ app.use(session({
     // store: new Store()
 }));
 
-// static file support:如果是开发环境，则处理静态文件
-if (!isProduction) {
-    let staticFiles = require('./static-files');
-    app.use(staticFiles('/static/', path.join(__dirname, './../static')));
-}
-
 //第三个解析POST请求
 app.use(bodyParser());
 
@@ -47,6 +45,14 @@ app.use(rest.restify());
 
 //最后一个middleware处理URL路由：
 app.use(controller());
+
+app.use(historyApiFallback());
+app.use(koaStatic(path.resolve('dist')));
+// static file support:如果是开发环境，则处理静态文件  ===头像
+if (!isProduction) {
+    let staticFiles = require('./server/static-files');
+    app.use(staticFiles('/static/', path.resolve('static')));
+}
 
 var server = app.listen(config.port);
 console.log('app started at port 3000...');

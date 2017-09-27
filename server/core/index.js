@@ -1,6 +1,6 @@
 const _webHttp = require('../webhttp');
 const APIError = require('../rest').APIError;
-const config = require('../../config');
+const config = require('../../web_config');
 
 module.exports = {
     getToken: async(ctx, next) => {
