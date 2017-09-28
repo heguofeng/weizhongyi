@@ -1,7 +1,7 @@
 <template>
   <div>
     关于我
-    <img src="../../assets/images/logo.png" alt="">
+    <img src="../../assets/images/png03.png" alt="">
   </div>
 </template>
 <style>

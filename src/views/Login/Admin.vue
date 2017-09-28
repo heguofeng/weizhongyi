@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="bg">
-    <img src="../../assets/images/bgAdmin.jpg" alt="背景" width="100%" height="100%">
+    <img src="/static/images/bgAdmin.jpg" alt="背景" width="100%" height="100%">
   </div>
     <div class="login-container">
       <el-form :model="form" :rules="rule" ref="form" label-position="right" label-width="80px">
@@ -10,7 +10,7 @@
           <el-input type="text" v-model="form.phone" auto-complete="off" placeholder="请输入手机号码"></el-input>
         </el-form-item>
         <el-form-item prop="password" label="密码">
-          <el-input type="password" v-model="form.password" auto-complete="off" placeholder="请输入密码"></el-input>
+          <el-input type="password" v-model="form.password" auto-complete="off" placeholder="请输入密码" @keyup.enter.native="loginIn"></el-input>
         </el-form-item>
         <el-form-item label="">
           <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
@@ -92,7 +92,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.logining = true;
-          this.axios.post('/api/admin/login', this.form).then((response)=>{
+          this.axios.post('/api/user/login', this.form).then((response)=>{
             this.logining = false;
             if (response.data.success == true) {
                 localStorage.setItem('admin',JSON.stringify(this.form));
@@ -124,7 +124,7 @@ export default {
       this.$router.push({ name: 'SignIn' });
     },
     goForgetPsw: function() {
-      this.$router.push({ name: 'ForgetPsw',params:{img_url:'../../static/images/bgAdmin.jpg'} });
+      this.$router.push({ name: 'ForgetPsw',params:{img_url:'/static/images/bgAdmin.jpg'} });
     },
 
         

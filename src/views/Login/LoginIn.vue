@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="bg">
-    <img src="../../assets/images/background.jpg" alt="背景" width="100%" height="100%">
+    <img src="/static/images/background.jpg" alt="背景" width="100%" height="100%">
   </div>
     <div class="login-container">
       <el-form :model="form" :rules="rule" ref="form" label-position="right" label-width="80px">
@@ -135,7 +135,7 @@ export default {
       this.$router.push({ name: 'SignIn' });
     },
     goForgetPsw: function() {
-      this.$router.push({ name: 'ForgetPsw',params:{img_url:"../../static/images/background.jpg",phone:this.form.phone} });
+      this.$router.push({ name: 'ForgetPsw',params:{img_url:"/static/images/background.jpg",phone:this.form.phone} });
     },
     goAdmin:function(){
       this.$router.push({name:'Admin'});

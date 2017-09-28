@@ -1,21 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
 //引入创建的页面
-import Admin from '@/views/Login/Admin.vue'
-import Home from '@/views/Home.vue'
-import PutInfo from '@/views/services/PutInfo.vue'
-import Main from '@/views/Main.vue'
-import MyInfo from '@/views/services/MyInfo.vue'
-import LoginIn from '@/views/Login/LoginIn.vue'
-import SignIn from '@/views/Login/SignIn.vue'
-import ForgetPsw from '@/views/Login/ForgetPsw.vue'
-import Form from '@/views/nav1/Form.vue'
-import Table from '@/views/nav1/Table.vue'
-import User from '@/views/nav1/User.vue'
-import NotFound from '@/views/404.vue'
-import ExistServices from '@/views/ExistServices.vue'
-import PayServices from '@/views/PayServices.vue'
+// import Admin from '@/views/Login/Admin.vue'
+// import Home from '@/views/Home.vue'
+// import PutInfo from '@/views/services/PutInfo.vue'
+// import Main from '@/views/Main.vue'
+// import MyInfo from '@/views/services/MyInfo.vue'
+// import LoginIn from '@/views/Login/LoginIn.vue'
+// import SignIn from '@/views/Login/SignIn.vue'
+// import ForgetPsw from '@/views/Login/ForgetPsw.vue'
+// import Form from '@/views/nav1/Form.vue'
+// import Table from '@/views/nav1/Table.vue'
+// import User from '@/views/nav1/User.vue'
+// import NotFound from '@/views/404.vue'
+// import ExistServices from '@/views/ExistServices.vue'
+// import PayServices from '@/views/PayServices.vue'
+
+const Admin = resolve => require(['@/views/Login/Admin.vue'], resolve)
+const Home = resolve => require(['@/views/Home.vue'], resolve)
+const PutInfo = resolve => require(['@/views/services/PutInfo.vue'], resolve)
+const Main = resolve => require(['@/views/Main.vue'], resolve)
+const MyInfo = resolve => require(['@/views/services/MyInfo.vue'], resolve)
+const LoginIn = resolve => require(['@/views/Login/LoginIn.vue'], resolve)
+const SignIn = resolve => require(['@/views/Login/SignIn.vue'], resolve)
+const ForgetPsw = resolve => require(['@/views/Login/ForgetPsw.vue'], resolve)
+const Form = resolve => require(['@/views/nav1/Form.vue'], resolve)
+const Table = resolve => require(['@/views/nav1/Table.vue'], resolve)
+const User = resolve => require(['@/views/nav1/User.vue'], resolve)
+const NotFound = resolve => require(['@/views/404.vue'], resolve)
+const ExistServices = resolve => require(['@/views/ExistServices.vue'], resolve)
+const PayServices = resolve => require(['@/views/PayServices.vue'], resolve)
 
 //使用路由插件
 Vue.use(VueRouter)
@@ -23,7 +39,7 @@ Vue.use(VueRouter)
 export default new VueRouter({
     mode: 'history',
     base: __dirname,
-    linkActiveClass: "active",
+    // linkActiveClass: "active",
     routes: [
         //路由
         { name: 'Admin', path: '/admin', component: Admin, hidden: true },

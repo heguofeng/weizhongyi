@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg">
-      <img src="../../assets/images/background.jpg" alt="背景" width="100%" height="100%">
+      <img src="/static/images/background.jpg" alt="背景" width="100%" height="100%">
     </div>
     <div class="main login-container">
       <el-form :model="form" :rules="rule" ref="form" label-position="right" label-width="80px">

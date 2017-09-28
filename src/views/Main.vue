@@ -6,9 +6,9 @@
           <el-col :span="4">
 
             <span class="title">
-              <a href="/main" title="首页">
+              <router-link :to="{name:'主页'}">
                 <i class="fa fa-stethoscope"></i> 微中医
-              </a>
+              </router-link>
             </span>
 
           </el-col>

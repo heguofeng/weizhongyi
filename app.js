@@ -5,7 +5,6 @@ const rest = require('./server/rest');
 const session = require('koa-session2');
 const config = require('./web_config');
 const path = require('path');
-const cors = require('koa2-cors');
 const koaStatic = require('koa-static');
 const historyApiFallback = require('koa-history-api-fallback');
 // 导入WebSocket模块:
