@@ -34,24 +34,30 @@
       </div>
     </header>
 
-    <section>
-      <el-row>
-        <el-col :span="12" class="breadcrumb-container">
-          <!-- 面包屑 -->
-          <el-breadcrumb separator="/">
-            <el-breadcrumb-item v-for="item in $route.matched" :key="item.path" :to="{name:item.name}">
-              {{ item.name }}
-            </el-breadcrumb-item>
-          </el-breadcrumb>
-        </el-col>
-        <el-col :span="12">
-          <strong class="bc_title">{{$route.name}}</strong>
-        </el-col>
-        <el-col :span="24">
-          <router-view></router-view>
-        </el-col>
-      </el-row>
-    </section>
+
+  <section class="bread">
+    <el-row>
+      <el-col :span="12" class="breadcrumb-container">
+        <!-- 面包屑 -->
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item v-for="item in $route.matched" :key="item.path" :to="{name:item.name}">
+            {{ item.name }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
+      <el-col :span="12">
+        <strong class="bc_title">{{$route.name}}</strong>
+      </el-col>
+    </el-row>
+  </section>
+  <section class="main">
+    <el-row>
+      <el-col :span="24">
+        <router-view></router-view>
+      </el-col>
+    </el-row>
+  </section>
+
     <footer>
       <div>—— 杭州微中医健康管理有限公司 ——</div>
     </footer>
@@ -181,14 +187,14 @@ header {
 }
 
 
-section {
+.bread {
   box-sizing: border-box;
-  width: 56%;
+  width: 1080px;
   margin: 0 auto;
-  min-height: 650px; // border: 1px solid #A9B7B7;
   background-color: #fff;
-  padding: 10px 25px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  padding: 0px 25px;
+  border-radius: 5px;
   .bc_title {
     float: right;
     color: #475669;
@@ -201,7 +207,17 @@ section {
     margin-top: 15px;
   }
 }
-
+.main{
+    min-height: 650px; // border: 1px solid #A9B7B7;
+    box-sizing: border-box;
+    width: 1080px;
+    margin: 0 auto;
+    background-color: #fff;
+    // padding: 10px 25px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding-bottom: 20px;
+}
 .userinfo {
   text-align: right;
   float: right;

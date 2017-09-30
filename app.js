@@ -13,8 +13,6 @@ const WebSocket = require('ws');
 const WebSocketServer = WebSocket.Server;
 const app = new Koa();
 
-app.use(cors());
-
 //声明当前环境变量(全局)
 // process.env.NODE_ENV = 'production';
 const isProduction = process.env.NODE_ENV === 'production';

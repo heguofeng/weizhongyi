@@ -3,24 +3,10 @@ import VueRouter from 'vue-router'
 
 
 //引入创建的页面
-// import Admin from '@/views/Login/Admin.vue'
-// import Home from '@/views/Home.vue'
-// import PutInfo from '@/views/services/PutInfo.vue'
-// import Main from '@/views/Main.vue'
-// import MyInfo from '@/views/services/MyInfo.vue'
-// import LoginIn from '@/views/Login/LoginIn.vue'
-// import SignIn from '@/views/Login/SignIn.vue'
-// import ForgetPsw from '@/views/Login/ForgetPsw.vue'
-// import Form from '@/views/nav1/Form.vue'
-// import Table from '@/views/nav1/Table.vue'
-// import User from '@/views/nav1/User.vue'
-// import NotFound from '@/views/404.vue'
-// import ExistServices from '@/views/ExistServices.vue'
-// import PayServices from '@/views/PayServices.vue'
 
 const Admin = resolve => require(['@/views/Login/Admin.vue'], resolve)
 const Home = resolve => require(['@/views/Home.vue'], resolve)
-const PutInfo = resolve => require(['@/views/services/PutInfo.vue'], resolve)
+const Appointment = resolve => require(['@/views/services/Appointment.vue'], resolve)
 const Main = resolve => require(['@/views/Main.vue'], resolve)
 const MyInfo = resolve => require(['@/views/services/MyInfo.vue'], resolve)
 const LoginIn = resolve => require(['@/views/Login/LoginIn.vue'], resolve)
@@ -32,6 +18,9 @@ const User = resolve => require(['@/views/nav1/User.vue'], resolve)
 const NotFound = resolve => require(['@/views/404.vue'], resolve)
 const ExistServices = resolve => require(['@/views/ExistServices.vue'], resolve)
 const PayServices = resolve => require(['@/views/PayServices.vue'], resolve)
+const Step1 = resolve => require(['views/services/Appointment/Step1.vue'], resolve)
+const Step2 = resolve => require(['views/services/Appointment/Step2.vue'], resolve)
+const Step3 = resolve => require(['views/services/Appointment/Step3.vue'], resolve)
 
 //使用路由插件
 Vue.use(VueRouter)
@@ -54,11 +43,24 @@ export default new VueRouter({
             meta: { authUser: true },
             redirect: '/main/existservices',
             children: [
-                //将页面和指定path的路由关联,不需要‘/’符号
+                //将页面和指定path的路由关联,不需要‘/’符号   display:是否显示在主页面  authUser:是否需要用户登录  imgUrl:图标路径
                 { name: '已开通服务', path: 'existservices', component: ExistServices, meta: { authUser: true } },
                 { name: '未开通服务', path: 'payservices', component: PayServices, meta: { authUser: true } },
                 { name: '我的资料', path: 'myinfo', component: MyInfo, meta: { authUser: true }, display: true, imgUrl: require('@/assets/images/png06.png') },
-                { name: '修改资料', path: 'putinfo', component: PutInfo, meta: { authUser: true }, display: true, imgUrl: require('@/assets/images/png01.png') },
+                {
+                    name: '预约挂号',
+                    path: 'appointment',
+                    component: Appointment,
+                    meta: { authUser: true },
+                    display: true,
+                    imgUrl: require('@/assets/images/png01.png'),
+                    redirect: '/main/appointment/step1',
+                    children: [
+                        { name: '选择医院', path: 'step1', component: Step1 },
+                        { name: '确认预约信息', path: 'step2', component: Step2 },
+                        { name: '预约完成', path: 'step3', component: Step3 },
+                    ]
+                },
             ]
         },
         {

@@ -6,7 +6,7 @@ import 'element-ui/lib/theme-default/index.css'
 import App from './App.vue'
 import router from './routes'
 import axios from 'axios'
-import 'font-awesome/css/font-awesome.min.css'
+// import 'font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);

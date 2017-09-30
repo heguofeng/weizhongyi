@@ -1,6 +1,7 @@
+
 <template>
   <div id="app">
-			<router-view></router-view>
+	<router-view></router-view>
   </div>
 </template>
 
@@ -23,9 +24,18 @@ export default {
 </script>
 
 <style lang="scss">
-body{
+body,p{
   margin: 0;
   padding: 0;
+}
+table,
+td,
+tr,
+th {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -54,4 +64,6 @@ body{
 	}
 }
 
+.clearfix:after{content:"";*display:block;*clear:both;}
+.clearfix{zoom:1;}
 </style>
