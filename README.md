@@ -1,10 +1,16 @@
 
-# 目录
-.
-|——build    //vue-cli 生成，用于webpack监听、构建
-│   ├── build.js
-│   ├── check-versions.js
-│   ├── dev-client.js
+# 目录  
+
+`.  
+
+|——build    //vue-cli 生成，用于webpack监听、构建  
+
+│   ├── build.js  
+
+│   ├── check-versions.js  
+
+│   ├── dev-client.js  
+
 │   ├── dev-server.js
 │   ├── utils.js
 │   ├── webpack.base.conf.js
@@ -49,7 +55,7 @@
 |——index.html  
 |——package.json  //项目描述文件
 └── web_config.js   //服务器相关配置（服务器地址端口或数据库名称等变动需修改）
-
+`
 # 运行环境： 
     1.Node（v8.2.1）、Vue(v2.8.2)  
     2.反向代理可使用nginx：（可添加以下代码至nginx.conf文件），可实现无需在地址栏后面加端口号访问
