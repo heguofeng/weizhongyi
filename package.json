@@ -1,12 +1,12 @@
 {
-    "name": "my-vue-project",
+    "name": "weizhongyi",
     "version": "1.0.0",
-    "description": "this is my first rount vue",
+    "description": "weizhongyi web system",
     "author": "heguofeng <32927202@qq.com>",
     "private": true,
     "scripts": {
         "dev": "node build/dev-server.js",
-        "start": "node --use_strict ./app.js",
+        "server": "node --use_strict ./app.js",
         "build": "node build/build.js",
         "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
         "e2e": "node test/e2e/runner.js",

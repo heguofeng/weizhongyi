@@ -9,8 +9,6 @@ module.exports = {
     'GET /api/users': index.getUsers,
     //查询某位用户
     'GET /api/user/:id': index.getUserById,
-    //新建学生
-    'POST /api/student': index.postStudent,
     //查找是否注册重复账号
     'POST /api/user-phone': index.getUserByPhone,
     //删除用户

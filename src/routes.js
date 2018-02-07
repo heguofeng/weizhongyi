@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 
 //引入创建的页面
-
 const Admin = resolve => require(['@/views/Login/Admin.vue'], resolve)
 const Home = resolve => require(['@/views/Home.vue'], resolve)
 const Appointment = resolve => require(['@/views/services/Appointment.vue'], resolve)
@@ -26,7 +25,7 @@ const Step3 = resolve => require(['views/services/Appointment/Step3.vue'], resol
 Vue.use(VueRouter)
 
 export default new VueRouter({
-    mode: 'history',
+    mode: 'history', // 开启HTML5的history模式，可以让地址栏的url长得跟正常页面跳转的url一样。
     base: __dirname,
     // linkActiveClass: "active",
     routes: [
@@ -39,8 +38,8 @@ export default new VueRouter({
             name: '主页',
             path: '/main',
             component: Main,
-            hidden: true, //是否显示
-            meta: { authUser: true },
+            hidden: true, //是否在后台管理侧方导航显示
+            meta: { authUser: true }, //是否需要登录才能进
             redirect: '/main/existservices',
             children: [
                 //将页面和指定path的路由关联,不需要‘/’符号   display:是否显示在主页面  authUser:是否需要用户登录  imgUrl:图标路径
@@ -52,8 +51,8 @@ export default new VueRouter({
                     path: 'appointment',
                     component: Appointment,
                     meta: { authUser: true },
-                    display: true,
-                    imgUrl: require('@/assets/images/png01.png'),
+                    display: true, //在服务列表中显示
+                    imgUrl: require('@/assets/images/png01.png'), //图片路径
                     redirect: '/main/appointment/step1',
                     children: [
                         { name: '选择医院', path: 'step1', component: Step1 },
@@ -67,7 +66,7 @@ export default new VueRouter({
             name: 'Home',
             path: '/home',
             component: Home,
-            name2: '功能模块',
+            name2: '功能模块', //name2可以由name代替，以后可以取消不使用
             meta: { requiresAuth: true }, // 可以在路由元信息指定哪些页面需要登录权限
             iconCls: 'el-icon-message', //图标样式class           
             children: [

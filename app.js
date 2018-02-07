@@ -43,7 +43,9 @@ app.use(rest.restify());
 //最后一个middleware处理URL路由：
 app.use(controller());
 
+//历史记录回滚
 app.use(historyApiFallback());
+//加载静态文件
 app.use(koaStatic(path.resolve('dist')));
 // static file support:如果是开发环境，则处理静态文件  ===头像
 if (!isProduction) {

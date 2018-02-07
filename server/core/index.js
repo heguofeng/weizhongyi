@@ -3,6 +3,7 @@ const APIError = require('../rest').APIError;
 const config = require('../../web_config');
 
 module.exports = {
+    //获取token
     getToken: async(ctx, next) => {
         //异步方法一  async/await，同步形式
         return _webHttp.httpGet(`${config.serverIp}/token?user=admin&password=123456`).then(data => {
@@ -14,7 +15,7 @@ module.exports = {
             console.error("出错了：", error);
         });
     },
-    //获取学生
+    //获取yonghu
     getUsers: async(ctx, next) => {
         return _webHttp.httpGet(`${config.serverIp}/records?${config.sample_U}`).then(data => {
             let _data = JSON.parse(data).data;
@@ -39,20 +40,7 @@ module.exports = {
             console.error("读取学生数据出错了：", error);
         });
     },
-    postStudent: async(ctx, next) => {
-        var postDoc = {
-                "sample": "student"
-            },
-            token = ctx.request.body.token;
-        return _webHttp.httpPost(`${config.serverIp}/record?token=${token}`, JSON.stringify(postDoc)).then(data => {
-            let _data = JSON.parse(data).data.id; //传递ID
-            ctx.rest({
-                result: _data
-            });
-        }, error => {
-            console.log("新建出错了：" + error)
-        });
-    },
+
     deleteUserById: async(ctx, next) => {
         // console.log(`正在执行删除学生 ${ctx.params.id}`);
         var id = ctx.params.id;

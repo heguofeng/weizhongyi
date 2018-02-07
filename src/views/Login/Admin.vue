@@ -72,8 +72,8 @@ export default {
     return {
       logining: false,
       form: {
-        phone: '',
-        password: ''
+        phone: '15888274549',
+        password: '123456'
       },
       rule: {
         phone: [

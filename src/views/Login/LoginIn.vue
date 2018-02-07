@@ -85,7 +85,7 @@ export default {
       form: {
         _id:'',
         phone: '15888274549',
-        password: ''
+        password: '123456'
       },
       rule: {
         phone: [
