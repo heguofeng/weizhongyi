@@ -1,61 +1,55 @@
 
 # 目录  
+    .  
+    |——build    //vue-cli 生成，用于webpack监听、构建  
+    │   ├── build.js  
+    │   ├── check-versions.js  
+    │   ├── dev-client.js  
+    │   ├── dev-server.js
+    │   ├── utils.js
+    │   ├── webpack.base.conf.js
+    │   ├── webpack.dev.conf.js
+    │   └── webpack.prod.conf.js
+    ├── config // vue-cli 生成自己加的一些配置文件
+    │   ├── default.conf
+    │   ├── dev.env.js
+    │   ├── index.js
+    │   └── prod.env.js
+    ├── dist // Vue build 后的文件夹
+    │   ├── index.html // 入口文件
+    │   └── static // 静态资源
+    ├── server // Koa后端，用于提供Api
+    |   |——controllers  //restApi控制器
+    |   |   └──api.js      // controller-控制器
+    |   |——core   //restApi核心文件
+    |   |   |——fileUpload.js    //文件上传 rest-Api
+    |   |   |——index.js      //index事件 rest-Api
+    |   │   └── login.js     // 登录注册事件 rest-Api
+    |   |——controller.js    //扫描注册controllers
+    |   |——rest.js      //支持REST的middleware
+    |   |——static-files.js      //支持静态文件的middleware
+    |   |——upload.js    //文件上传middleware
+    |   └── webhttp.js   //访问服务器的ajax方法封装
+    |——src      //Vue前端 vue-cli 生成&自己添加的utils工具类
+    |   |——assets  //相关静态文件资源存放
+    |   |——styles  //css样式存放
+    |   |——views  //组件存放
+    |   |   |——Login    //登录注册相关组件
+    |   |   |——nav1     //home侧边栏导航1
+    |   |   |——services     //服务
+    |   |   |——Home.vue     //后台管理员主页面
+    |   |   |——Main.vue     //前台主页面
+    |   |   |——ExistServices.vue   //已开通服务
+    |   |   |——PayServices.vue     //未开通服务
+    |   |——App.vue  //主文件
+    |   |——mian.js  //引入Vue等资源、挂载Vue的入口js
+    |   └── routes.js //路由
+    |——static   // 静态文件存放 vue-cli自己生成
+    |——app.js   //后端node主入口，Koa入口文件
+    |——index.html  
+    |——package.json  //项目描述文件
+    └── web_config.js   //服务器相关配置（服务器地址端口或数据库名称等变动需修改）
 
-`.  
-
-|——build    //vue-cli 生成，用于webpack监听、构建  
-
-│   ├── build.js  
-
-│   ├── check-versions.js  
-
-│   ├── dev-client.js  
-
-│   ├── dev-server.js
-│   ├── utils.js
-│   ├── webpack.base.conf.js
-│   ├── webpack.dev.conf.js
-│   └── webpack.prod.conf.js
-├── config // vue-cli 生成自己加的一些配置文件
-│   ├── default.conf
-│   ├── dev.env.js
-│   ├── index.js
-│   └── prod.env.js
-├── dist // Vue build 后的文件夹
-│   ├── index.html // 入口文件
-│   └── static // 静态资源
-├── server // Koa后端，用于提供Api
-|   |——controllers  //restApi控制器
-|   |   └──api.js      // controller-控制器
-|   |——core   //restApi核心文件
-|   |   |——fileUpload.js    //文件上传 rest-Api
-|   |   |——index.js      //index事件 rest-Api
-|   │   └── login.js     // 登录注册事件 rest-Api
-|   |——controller.js    //扫描注册controllers
-|   |——rest.js      //支持REST的middleware
-|   |——static-files.js      //支持静态文件的middleware
-|   |——upload.js    //文件上传middleware
-|   └── webhttp.js   //访问服务器的ajax方法封装
-|——src      //Vue前端 vue-cli 生成&自己添加的utils工具类
-|   |——assets  //相关静态文件资源存放
-|   |——styles  //css样式存放
-|   |——views  //组件存放
-|   |   |——Login    //登录注册相关组件
-|   |   |——nav1     //home侧边栏导航1
-|   |   |——services     //服务
-|   |   |——Home.vue     //后台管理员主页面
-|   |   |——Main.vue     //前台主页面
-|   |   |——ExistServices.vue   //已开通服务
-|   |   |——PayServices.vue     //未开通服务
-|   |——App.vue  //主文件
-|   |——mian.js  //引入Vue等资源、挂载Vue的入口js
-|   └── routes.js //路由
-|——static   // 静态文件存放 vue-cli自己生成
-|——app.js   //后端node主入口，Koa入口文件
-|——index.html  
-|——package.json  //项目描述文件
-└── web_config.js   //服务器相关配置（服务器地址端口或数据库名称等变动需修改）
-`
 # 运行环境： 
     1.Node（v8.2.1）、Vue(v2.8.2)  
     2.反向代理可使用nginx：（可添加以下代码至nginx.conf文件），可实现无需在地址栏后面加端口号访问
